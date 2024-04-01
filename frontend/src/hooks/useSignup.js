@@ -22,7 +22,7 @@ const useSignup = () => {
 			if (data.error) {
 				throw new Error(data.error);
 			}
-			localStorage.setItem("CU-User", JSON.stringify(data));
+			localStorage.setItem("chat-user", JSON.stringify(data));
 			setAuthUser(data);
 		} catch (error) {
 			toast.error(error.message);
@@ -46,9 +46,10 @@ function handleInputErrors({ fullName, username, password, confirmPassword, gend
 		return false;
 	}
 
-	if (password.length < 8) {
-		toast.error("Password must be at least 8 characters");
+	if (password.length < 6) {
+		toast.error("Password must be at least 6 characters");
 		return false;
 	}
+
 	return true;
 }

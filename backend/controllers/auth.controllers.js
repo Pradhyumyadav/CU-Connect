@@ -55,23 +55,24 @@ export const signup = async(req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const {userName,password} = req.body;
-    const user = await User.findOne({userName});
-    const isPasswordvalid = await bcrypt.compare(password, user?.password || "");
-
-    if(!user ||  !isPasswordvalid){
+    const {username,password} = req.body;
+    console.log(":Req body",req.body,password)
+    const user = await User.findOne({userName:username});
+  
+    console.log("user",user)
+    if(!user || (password === user.password)){
       return res.status(400).json({error:"Invalid Credentials."});
     }
     
     //JWT token generation and setting cookie
     generateTokenAndSetCookie(user._id,res);
-
-    res.status(200).json({
-      _id: user._id,
-      fullName: user.fullName,
-      userName: user.userName,
-      profilePic: user.profilePic,
-    });
+      res.status(200).json({
+        _id: user._id,
+        fullName: user.fullName,
+        userName: user.userName,
+        profilePic: user.profilePic,
+      });
+    
 
   } catch (error) {
     console.log("Error in login controller", error.message);

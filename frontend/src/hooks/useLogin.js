@@ -10,6 +10,7 @@ const useLogin = () => {
 		const success = handleInputErrors(username, password);
 		if (!success) return;
 		setLoading(true);
+		console.log("userpass",username,password)
 		try {
 			const res = await fetch("/api/auth/login", {
 				method: "POST",
@@ -21,7 +22,7 @@ const useLogin = () => {
 			if (data.error) {
 				throw new Error(data.error);
 			}
-
+			console.log("usedata",data)
 			localStorage.setItem("chat-user", JSON.stringify(data));
 			setAuthUser(data);
 		} catch (error) {

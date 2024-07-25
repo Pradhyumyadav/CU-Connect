@@ -1,5 +1,4 @@
 
-ChatGPT
 CU-Connect Chat App
 
 CU-Connect is a real-time chat application built using the MERN Stack, integrating various technologies to provide a seamless user experience.
